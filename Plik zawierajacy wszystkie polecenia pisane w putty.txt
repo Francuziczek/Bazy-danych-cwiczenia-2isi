@@ -1,0 +1,25 @@
+#lab03 DF 2isi
+#Zadanie 1
+#1* 
+create table postac (id_postaci int auto_increment primary key, nazwa varchar(40) not null, rodzaj enum('wiking','ptak','kobieta'), data_ur date, wiek int(3) unsigned);
+#2*
+insert into postac values(default,'Bjorn','wiking','1968-01-04',53),(default,'Drozd','ptak','2002-10-16',19),(default,'Tesciowa','kobieta','1931-06-10',90);
+#3*
+update postac set wiek=88 where nazwa='Tesciowa';
+
+#Zadanie 2
+#1*
+create table walizka (id_walizki int auto_increment primary key,  pojemnosc int unsigned, kolor enum('rozowy', 'czerwony','teczowy','zolty'),id_wlasciciela int, foreign key (id_wlasciciela) references postac(id_postaci) on delete cascade);
+#2*
+alter table walizka alter kolor set default 'rozowy';
+#3*
+insert into walizka values(default,20,'czerwony',1);
+insert into walizka values(default,25,'zolty',3);
+
+#Zadanie 3
+#1*
+create table izba (adres_budynku varchar(45), nazwa_izby varchar(45), metraz int unsigned, wlasciciel int, foreign key (wlasciciel) references postac(id_postaci) on delete set null;
+#2*
+alter table izba add column kolor enum after metraz;
+alter table izba alter kolor set default 'czarny';
+#3*
