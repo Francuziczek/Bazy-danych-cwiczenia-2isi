@@ -61,3 +61,60 @@ update postac set na_statku='Viktoria' where nazwa='Wesley';
 delete from izba where nazwa_izby='spizarnia';
 #9*
 drop table izba;
+
+
+
+
+#zajecia 05-11-2021
+#Zadanie 1*
+#a) 
+DELETE FROM postac WHERE id_postaci IN(8,7);
+#b)
+SET foreign_key_checks=0;
+ALTER TABLE postac MODIFY id_postaci int; 
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_1;
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_2;
+ALTER TABLE walizka DROP FOREIGN KEY walizka_ibfk_1;
+ALTER TABLE postac DROP PRIMARY KEY;
+
+#Zadanie 2*
+#a)
+ALTER TABLE postac ADD COLUMN pesel VARCHAR(11) AFTER data_ur;
+UPDATE postac SET pesel='12345678900'+ id_postaci;
+ALTER TABLE postac ADD PRIMARY KEY(pesel);
+#b)
+ALTER TABLE postac MODIFY rodzaj enum('wiking','ptak','kobieta','syrena');
+#c)
+INSERT INTO postac(id_postaci, nazwa, rodzaj, data_ur, pesel, wiek) VALUES(7,'Gertruda Nieszczera','syrena','1990-12-10','12345678909',31);
+
+#Zadanie 3*
+#a)
+UPDATE postac SET na_statku='Viktoria' WHERE nazwa LIKE'%a%';
+#b)
+UPDATE statek SET max_ladownosc=max_ladownosc*0.7 WHERE data_wodowania between '1900-01-01' and '2000-12-31';
+#c)
+ALTER TABLE postac ADD CONSTRAINT wiekszy_od_1000 CHECK(wiek<1000);
+
+#Zadanie 4*
+#a)
+ALTER TABLE postac MODIFY rodzaj enum('wiking','ptak','kobieta','syrena','waz');
+INSERT INTO postac(id_postaci, nazwa, rodzaj, data_ur, pesel, wiek) VALUES(8,'Loko','waz','2010-10-10','12345678911',11);
+#b)
+CREATE TABLE marynarz LIKE postac;
+INSERT INTO marynarz SELECT*FROM postac WHERE na_statku IS NOT NULL;
+#c)
+ALTER TABLE marynarz ADD FOREIGN KEY (na_statku) REFERENCES statek(nazwa_statku) ON DELETE CASCADE;
+
+#Zadanie 5*
+#a)
+
+#b)
+
+#c)
+
+#d)
+
+#e)
+CREATE TABLE zwierz(id INT AUTO_INCREMENT PRIMARY KEY,nazwa VARCHAR(40) NOT NULL, wiek int(3) NOT NULL);
+
+#f)
