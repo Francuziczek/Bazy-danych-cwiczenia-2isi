@@ -107,14 +107,20 @@ ALTER TABLE marynarz ADD FOREIGN KEY (na_statku) REFERENCES statek(nazwa_statku)
 
 #Zadanie 5*
 #a)
-
+UPDATE postac SET na-statku=NULL;
+UPDATE marynarz SET na-statku=NULL;
 #b)
-
+DELETE FROM postac WHERE id_postaci=5;
 #c)
-
+DELETE FROM statek WHERE nazwa_statku = 'Viktoria';
+DELETE FROM statek WHERE nazwa_statku = 'Galean';
 #d)
-
+ALTER TABLE postac DROP FOREIGN KEY postac_ibfk_1;
+ALTER TABLE marynarz DROP FOREIGN KEY marynarz_ibfk_1;
+ALTER TABLE postac DROP FOREIGN KEY postac_ibfk_2;
+DROP TABLE statek;
 #e)
 CREATE TABLE zwierz(id INT AUTO_INCREMENT PRIMARY KEY,nazwa VARCHAR(40) NOT NULL, wiek int(3) NOT NULL);
-
 #f)
+INSERT INTO zwierz SELECT id_postaci, nazwa, wiek FROM postac WHERE rodzaj='ptak';
+INSERT INTO zwierz SELECT id_postaci, nazwa, wiek FROM postac WHERE rodzaj='waz';
