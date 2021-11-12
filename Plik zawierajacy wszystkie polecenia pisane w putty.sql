@@ -126,14 +126,21 @@ INSERT INTO zwierz SELECT id_postaci, nazwa, wiek FROM postac WHERE rodzaj='ptak
 INSERT INTO zwierz SELECT id_postaci, nazwa, wiek FROM postac WHERE rodzaj='waz';
 
 
+
 #Zajecia 12-11-2021
 #Zadanie 1 
 #a)
 #1 przypadek aktywna baza to baza imienna
 CREATE TABLE kreatura SELECT*FROM wikingowie.kreatura;
-#1 przypadek aktywna baza to baza wikingowie
+#2 przypadek aktywna baza to baza wikingowie
 CREATE TABLE franczakd.kreatura SELECT*FROM kreatura;
 
-
-
-
+CREATE TABLE franczakd.zasob SELECT*FROM zasob;
+CREATE TABLE franczakd.ekwipunek SELECT*FROM ekwipunek;
+#b)
+SELECT*FROM zasob;
+#c)
+SELECT*FROM zasob WHERE rodzaj='jedzenie'; 
+#d)
+..WHERE id_Postaci=1 or id_Postaci=2...
+..WHERE id_Postaci=1 IN (1,2)...
