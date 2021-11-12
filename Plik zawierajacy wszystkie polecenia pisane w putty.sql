@@ -143,15 +143,23 @@ SELECT*FROM zasob;
 SELECT*FROM zasob WHERE rodzaj='jedzenie'; 
 #d)
 SELECT idZasobu, ilosc FROM ekwipunek WHERE idKreatury IN(1,3,5);
-and idKreatury=3 and idKreatury=5;
+
 #Zadanie 2
+#a)
+SELECT*FROM kreatura WHERE rodzaj!='wiedzma' and udzwig>=50;
+#b)
+SELECT*FROM zasob WHERE waga>=2 and waga<=5;
+#c)
+SELECT*FROM kreatura WHERE nazwa LIKE '%or%';
+
+#Zadanie 3
 #a)
 
 #b)
 
 #c)
 
-
+#Zadanie 4
 
 
 
