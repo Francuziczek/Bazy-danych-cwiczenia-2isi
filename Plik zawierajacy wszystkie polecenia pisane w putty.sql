@@ -159,10 +159,21 @@ SELECT dataPozyskania FROM zasob WHERE MONTH(dataPozyskania) IN(7,8);
 #b)
 SELECT nazwa, rodzaj FROM zasob WHERE rodzaj IS NOT NULL;
 #c)
+SELECT*FROM kreatura ORDER BY dataUr ASC LIMIT 5; 
+#np limit 5,5; indeks start, indeks elementow
 
 #Zadanie 4
+#a)
+SELECT DISTINCT rodzaj FROM zasob; #wypisywanie wartosci bez powtorzen
+#b)
+#CONCAT(lancuch znakow, lancuch znakow,...)
+SELECT CONCAT(nazwa,rodzaj) FROM kreatura WHERE rodzaj LIKE '%wi%';
+#c)
+SELECT*FROM zasob WHERE YEAR(dataPozyskania) IN (2000,2001,2002,2003,2004,2005,2006,2007);
 
+#Zadanie 5
+#a)
 
+#b)
 
-
-
+#c)
