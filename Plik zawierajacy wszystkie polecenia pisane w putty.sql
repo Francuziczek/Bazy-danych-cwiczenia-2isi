@@ -169,10 +169,11 @@ SELECT DISTINCT rodzaj FROM zasob; #wypisywanie wartosci bez powtorzen
 #CONCAT(lancuch znakow, lancuch znakow,...)
 SELECT CONCAT(nazwa,rodzaj) FROM kreatura WHERE rodzaj LIKE '%wi%';
 #c)
-SELECT*FROM zasob WHERE YEAR(dataPozyskania) IN (2000,2001,2002,2003,2004,2005,2006,2007);
+SELECT CONCAT(nazwa,'  ','calkowita waga','  ',ilosc*waga) FROM zasob WHERE YEAR(dataPozyskania) IN (2000,2001,2002,2003,2004,2005,2006,2007);
 
 #Zadanie 5
 #a)
+SELECT CONCAT(nazwa,'  ','waga netto','  ',ilosc*waga) FROM zasob ;
 
 #b)
 
