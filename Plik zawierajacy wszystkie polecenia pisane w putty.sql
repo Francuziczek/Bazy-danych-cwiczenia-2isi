@@ -124,3 +124,16 @@ CREATE TABLE zwierz(id INT AUTO_INCREMENT PRIMARY KEY,nazwa VARCHAR(40) NOT NULL
 #f)
 INSERT INTO zwierz SELECT id_postaci, nazwa, wiek FROM postac WHERE rodzaj='ptak';
 INSERT INTO zwierz SELECT id_postaci, nazwa, wiek FROM postac WHERE rodzaj='waz';
+
+
+#Zajecia 12-11-2021
+#Zadanie 1 
+#a)
+#1 przypadek aktywna baza to baza imienna
+CREATE TABLE kreatura SELECT*FROM wikingowie.kreatura;
+#1 przypadek aktywna baza to baza wikingowie
+CREATE TABLE franczakd.kreatura SELECT*FROM kreatura;
+
+
+
+
