@@ -150,13 +150,14 @@ SELECT*FROM kreatura WHERE rodzaj!='wiedzma' and udzwig>=50;
 #b)
 SELECT*FROM zasob WHERE waga>=2 and waga<=5;
 #c)
-SELECT*FROM kreatura WHERE nazwa LIKE '%or%';
+SELECT*FROM kreatura WHERE nazwa LIKE '%or%' and udzwig>=30 and udzwig<=70;
+udzwig>=30 and udzwig<=70;
 
 #Zadanie 3
 #a)
-
+SELECT dataPozyskania FROM zasob WHERE MONTH(dataPozyskania) IN(7,8);
 #b)
-
+SELECT nazwa, rodzaj FROM zasob WHERE rodzaj IS NOT NULL;
 #c)
 
 #Zadanie 4
