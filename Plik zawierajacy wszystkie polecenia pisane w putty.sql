@@ -142,5 +142,18 @@ SELECT*FROM zasob;
 #c)
 SELECT*FROM zasob WHERE rodzaj='jedzenie'; 
 #d)
-..WHERE id_Postaci=1 or id_Postaci=2...
-..WHERE id_Postaci=1 IN (1,2)...
+SELECT idZasobu, ilosc FROM ekwipunek WHERE idKreatury IN(1,3,5);
+and idKreatury=3 and idKreatury=5;
+#Zadanie 2
+#a)
+
+#b)
+
+#c)
+
+
+
+
+
+
+
