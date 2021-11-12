@@ -173,7 +173,7 @@ SELECT CONCAT(nazwa,'  ','calkowita waga','  ',ilosc*waga) FROM zasob WHERE YEAR
 
 #Zadanie 5
 #a)
-SELECT CONCAT(nazwa,'  ','waga netto','  ',ilosc*waga) FROM zasob ;
+SELECT CONCAT(nazwa,'  ','waga netto','  ',waga*0,3,'  ','waga odpadkow', ) FROM zasob;
 
 #b)
 SELECT*FROM zasob WHERE rodzaj is NULL;
