@@ -204,21 +204,42 @@ SELECT rodzaj,SUM(waga)AS 'suma_wag' FROM zasob GROUP BY rodzaj;
 #b)
 SELECT nazwa, AVG(waga) AS 'srednia_waga' FROM zasob WHERE ilosc>=4 GROUP BY nazwa HAVING SUM(waga)>10;
 #c)
-SELECT nazwa, COUNT(nazwa) AS 'ilosc_roznych_nazw' FROM zasob  GROUP BY nazwa HAVING SUM(ilosc)>1;
+SELECT DISTINCT nazwa, COUNT(nazwa) AS 'ilosc_roznych_nazw' FROM zasob  GROUP BY nazwa HAVING SUM(ilosc)>1;
+SELECT COUNT(DISTINCT(nazwa)) FROM zasob;
+
+#złączanie wewnetrze where
+SELECT*FROM kreatura, ekwipunek WHERE kreatura.idKreatury=ekwipunek.IdKreatury; 
+#zlączanie za pomoca INNER JOIN
+SELECT*FROM kreatura INNER JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.IdKreatury;
 
 #Zadanie 3*
 #a) 
+SELECT*FROM kreatura INNER JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.IdKreatury;
+
+SELECT kreatura.nazwa SUM(ekwipunek.ilosc) AS 'ilosc zasobow' FROM kreatura, ekwipunek WHERE kreatura.idKreatury=ekwipunek.IdKreatury GROUP BY kreatura.nazwa;
+SELECT kreatura.nazwa, SUM(ekwipunek.ilosc) FROM kreatura INNER JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.IdKreatury GROUP BY kreatura.IdKreatury;
 
 #b)
+SELECT*FROM kreatura INNER JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.IdKreatury INNER JOIN zasob ON ekwipunek.idZasobu=zasob.idZasobu;
+
+SELECT kreatura.nazwa, zasob.nazwa FROM kreatura INNER JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.IdKreatury INNER JOIN zasob ON ekwipunek.idZasobu=zasob.idZasobu;
 
 #c)
+SELECT k.idKreatury, k.nazwa, e.idKreatury, e.idZasobu FROM kreatura k LEFT JOIN ekwipunek e ON k.idKreatury=e.idKreatury WHERE e.idKreatury IS NULL;
+
+#podzapytanie
+SELECT idKreatury, kreatura.nazwa FROM kreatura WHERE idKreatury NOT IN(SELECT DISTINCT idKreatury FROM ekwipunek WHERE idKreatury IS NOT NULL);
+
 
 #Zadanie 4*
 #a) 
+SELECT*FROM kreatura NATURAL JOIN ekwipunek;
 
+SELECT kreatura.nazwa, kreatura.dataUr, zasob.nazwa FROM kreatura INNER JOIN zasob WHERE kreatura.nazwa IN(SELECT idKreatury FROM kreatura WHERE YEAR(dataUr)>'1670') ;
 #b)
-
+SELECT DISTINCT kreatura.nazwa, kreatura.dataUr FROM kreatura INNER JOIN zasob WHERE zasob.rodzaj='jedzenie' ORDER BY kreatura.dataUr DESC LIMIT 5;
 #c)
+SELECT kreatura.nazwa FROM kreatura INNER JOIN kreatura WHERE id.Kreatury
 
 #Zadanie 5*
 #a) 
