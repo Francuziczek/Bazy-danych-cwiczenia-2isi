@@ -174,8 +174,55 @@ SELECT CONCAT(nazwa,'  ','calkowita waga','  ',ilosc*waga) FROM zasob WHERE YEAR
 #Zadanie 5
 #a)
 SELECT CONCAT(nazwa,'  ','waga netto','  ',ilosc*waga*0.7,'  ','waga odpadkow','  ',ilosc*waga*0.3) FROM zasob;
-
 #b)
 SELECT*FROM zasob WHERE rodzaj is NULL;
 #c)
 SELECT DISTINCT nazwa,rodzaj FROM zasob WHERE nazwa LIKE'Ba%' OR nazwa LIKE '%os' ORDER BY nazwa ASC;
+
+
+#AVG()-srednia
+#COUNT()-zlicza ilosc elementow
+#SUM()- suma wartosci(liczbowych)
+#MIN()-minimum
+#MAX()-maksimum
+
+#zajecia 19-11-2021
+#Zadanie 1*
+#a) 
+SELECT round(AVG(udzwig),0) FROM kreatura WHERE rodzaj='wiking';
+#b)
+SELECT rodzaj,AVG(waga), COUNT(nazwa) FROM kreatura GROUP BY rodzaj;
+#c)
+#now()- dzisiejsza data i czas 
+#CURDATE()- dzisiejsza data
+SELECT rodzaj, AVG(2021-YEAR(dataUr)) AS 'sredni wiek' FROM kreatura GROUP BY rodzaj;
+SELECT rodzaj, AVG(YEAR(CURDATE())-YEAR(dataUr)) AS 'sredni_wiek' FROM kreatura GROUP BY rodzaj;
+
+#Zadanie 2*
+#a) 
+SELECT rodzaj,SUM(waga)AS 'suma_wag' FROM zasob GROUP BY rodzaj;
+#b)
+SELECT nazwa, AVG(waga) AS 'srednia_waga' FROM zasob WHERE ilosc>=4 GROUP BY nazwa HAVING SUM(waga)>10;
+#c)
+SELECT nazwa, COUNT(nazwa) AS 'ilosc_roznych_nazw' FROM zasob  GROUP BY nazwa HAVING SUM(ilosc)>1;
+
+#Zadanie 3*
+#a) 
+
+#b)
+
+#c)
+
+#Zadanie 4*
+#a) 
+
+#b)
+
+#c)
+
+#Zadanie 5*
+#a) 
+
+#b)
+
+#c)
