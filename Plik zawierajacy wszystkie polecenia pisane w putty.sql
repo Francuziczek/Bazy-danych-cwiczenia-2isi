@@ -233,13 +233,12 @@ SELECT idKreatury, kreatura.nazwa FROM kreatura WHERE idKreatury NOT IN(SELECT D
 
 #Zadanie 4*
 #a) 
-SELECT*FROM kreatura NATURAL JOIN ekwipunek;
-
-SELECT kreatura.nazwa, kreatura.dataUr, zasob.nazwa FROM kreatura INNER JOIN zasob WHERE kreatura.nazwa IN(SELECT idKreatury FROM kreatura WHERE YEAR(dataUr)>'1670') ;
+SELECT*FROM kreatura natural join ekwipunek, zasob;
+SELECT k.nazwa, z.nazwa FROM kreatura k INNER JOIN ekwipunek e ON k.idKreatury=e.idKreatury INNER JOIN zasob z ON e.idZasobu=z.idZasobu where k.rodzaj = 'wiking' and k.dataUr > '1669.12.31' and k.dataUr < '1680.01.01'; 
 #b)
-SELECT DISTINCT kreatura.nazwa, kreatura.dataUr FROM kreatura INNER JOIN zasob WHERE zasob.rodzaj='jedzenie' ORDER BY kreatura.dataUr DESC LIMIT 5;
+SELECT k.nazwa from kreatura k INNER JOIN ekwipunek e ON k.idKreatury=e.idKreatury INNER JOIN zasob z ON e.idZasobu=z.idZasobu where z.rodzaj = 'jedzenie' order by dataUr desc LIMIT 5;
 #c)
-SELECT kreatura.nazwa FROM kreatura INNER JOIN kreatura WHERE id.Kreatury
+SELECT j.nazwa, j.idKreatury, k.nazwa, k.idKreatury from kreatura k INNER JOIN kreatura j ON k.idKreatury=j.idKreatury+5;
 
 #Zadanie 5*
 #a) 
