@@ -263,11 +263,20 @@ SELECT idKreatury, nazwa FROM kreatura WHERE idKreatury NOT IN (SELECT id_uczest
 SELECT* FROM kreatura LEFT JOIN uczestnicy ON kreatura.idKreatury=uczestnicy.id_uczestnika WHERE id_uczestnika IS NULL; 
 
 #c)
-
+#k1 identyfikacja niezbednych tabeli
+SELECT w.nazwa, SUM(e.ilosc)  AS 'suma ilosci ekwipunku'  FROM wyprawa w 
+INNER JOIN uczestnicy u ON w.id_wyprawy=u.id_wyprawy
+INNER JOIN ekwipunek e ON u.id_uczestnika=e.idKreatury
+GROUP BY w.nazwa;
 
 #Zadanie 2*
 #a) 
+##SELECT rodzaj,GROUP_CONCAT(nazwa separator ' - ') FROM kreatura GROUP BY rodzaj;
 
+SELECT w.nazwa, COUNT (u.id_uczestnika), GROUP_CONCAT(k.nazwa) FROM kreatura k
+INNER JOIN uczestnicy u ON k.id_wkreatury=u.id_uczestnika
+INNER JOIN wyprawa w ON u.id_wyprawy=u.id_wyprawy
+GROUP BY w.nazwa;
 #b)
 
 #c)
