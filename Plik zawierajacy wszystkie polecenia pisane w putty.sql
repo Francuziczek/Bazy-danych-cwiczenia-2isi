@@ -242,6 +242,47 @@ SELECT j.nazwa, j.idKreatury, k.nazwa, k.idKreatury from kreatura k INNER JOIN k
 
 #Zadanie 5*
 #a) 
+SELECT k.rodzaj, AVG(e.ilosc*z.waga) FROM kreatura k INNER JOIN ekwipunek e ON k.idKreatury=e.idKreatury INNER JOIN zasob z ON e.idZasobu=z.idZasobu WHERE k.rodzaj NOT IN('malpa','waz') AND e.ilosc<30 GROUP BY k.rodzaj HAVING SUM(e.ilosc)<30;
+#b)
+SELECT nazwa FROM kreatura WHERE rodzaj !='wiking' UNION SELECT nazwa FROM kreatura WHERE rodzaj ='wiking';
+
+SELECT nazwa, dataUr, rodzaj FROM kreatura WHERE dataUr IN (SELECT MAX(dataUr) FROM kreatura GROUP BY rodzaj) UNION SELECT nazwa, dataUr, rodzaj FROM kreatura WHERE dataUr IN (SELECT MIN(dataUr) FROM kreatura GROUP BY rodzaj);
+
+SELECT k.nazwa, k.dataUr, k.rodzaj FROM kreatura k, (SELECT MIN(dataUr) AS min, MAX(dataUr) AS max FROM kreatura GROUP BY rodzaj) pod WHERE k.dataUr=pod.min OR k.dataUr=pod.max; 
+
+
+
+
+#zajecia 26-11-2021
+#Zadanie 1*
+#a) 
+
+#b)
+SELECT idKreatury, nazwa FROM kreatura WHERE idKreatury NOT IN (SELECT id_uczestnika from uczestnicy);
+#lub
+SELECT* FROM kreatura LEFT JOIN uczestnicy ON kreatura.idKreatury=uczestnicy.id_uczestnika WHERE id_uczestnika IS NULL; 
+
+#c)
+
+
+#Zadanie 2*
+#a) 
+
+#b)
+
+#c)
+
+
+#Zadanie 3*
+#a) 
+
+#b)
+
+#c)
+
+
+#Zadanie 4*
+#a) 
 
 #b)
 
