@@ -306,7 +306,7 @@ GROUP BY k.nazwa;
 SELECT idWyprawy, SUM(length(dziennik)) AS suma FROM etapy_wyprawy GROUP BY idWyprawy HAVING suma<400 ;
 
 #b)
-SELECT w.id_wyprawy, SUM(z.waga), COUNT(k.idKreatury), w.nazwa, SUM(z.waga)/COUNT(k.idKreatury) AS srednia_waga FROM wyprawa w
+SELECT w.id_wyprawy, SUM(z.waga), COUNT(w.id_wyprawy), SUM(z.waga)/COUNT(k.idKreatury) AS srednia_waga FROM wyprawa w
 LEFT JOIN uczestnicy u ON w.id_wyprawy=u.id_wyprawy
 LEFT JOIN kreatura k ON u.id_uczestnika=k.idKreatury
 LEFT JOIN ekwipunek e ON k.idKreatury=e.idKreatury
