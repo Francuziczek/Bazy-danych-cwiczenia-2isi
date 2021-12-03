@@ -273,26 +273,46 @@ GROUP BY w.nazwa;
 #a) 
 ##SELECT rodzaj,GROUP_CONCAT(nazwa separator ' - ') FROM kreatura GROUP BY rodzaj;
 
-SELECT w.nazwa, COUNT (u.id_uczestnika), GROUP_CONCAT(k.nazwa) FROM kreatura k
-INNER JOIN uczestnicy u ON k.id_wkreatury=u.id_uczestnika
+SELECT w.nazwa, COUNT (u.id_uczestnika), GROUP_CONCAT(k.nazwa)) FROM kreatura k
+INNER JOIN uczestnicy u ON k.id_kreatury=u.id_uczestnika
 INNER JOIN wyprawa w ON u.id_wyprawy=u.id_wyprawy
 GROUP BY w.nazwa;
 #b)
-
-#c)
+SELECT w.id_wyprawy, w.data_rozpoczecia, ew.idEtapu, s.nazwa, ew.kolejnosc, k.nazwa AS kierownik FROM kreatura k 
+INNER JOIN wyprawa w ON k.idKreatury=w.kierownik 
+INNER JOIN etapy_wyprawy ew ON w.id_wyprawy=ew.idWyprawy 
+INNER JOIN sektor s ON ew.sektor=s.id_sektora
+ORDER BY w.data_rozpoczecia, ew.kolejnosc;
 
 
 #Zadanie 3*
 #a) 
+#SELECT IF(e.idKreatury is NULL,'Brak wlasciciela',e.idKreatury) FROM ekwipunek e
+#LEFT JOIN kreatura k ON k.idKreatury=e.idKreatury;
+
+
+SELECT s.nazwa, COUNT(ew.sektor) AS 'ilosc odwiedzin' FROM sektor s
+LEFT JOIN etapy_wyprawy ew ON s.id_sektora=ew.sektor
+GROUP BY s.nazwa 
+ORDER BY COUNT(ew.sektor);
 
 #b)
-
-#c)
-
+SELECT k.nazwa, if(COUNT(u.id_uczestnika)=0,'Nie bral udzialu','Bral udzial') AS 'BRAL CZY NIE BRAL UDZIALU' FROM uczestnicy u
+RIGHT JOIN kreatura k ON k.idKreatury=u.id_uczestnika
+GROUP BY k.nazwa;
 
 #Zadanie 4*
 #a) 
+SELECT idWyprawy, SUM(length(dziennik)) AS suma FROM etapy_wyprawy GROUP BY idWyprawy HAVING suma<400 ;
+
 
 #b)
 
-#c)
+#Zadanie 5*
+#a) 
+SELECT k.nazwa, datediff(curdate(),dataUr) FROM kreatura k
+INNER JOIN uczestnicy u ON k.idKreatury=u.id_uczestnika
+INNER JOIN wyprawa w ON u.id_wyprawy=w.id_wyprawy
+INNER JOIN etapy_wyprawy ew ON w.id_wyprawy=ew.idWyprawy
+INNER JOIN sektor s ON ew.sektor=s.nazwa
+WHERE w.nazwa='Chatka dziadka';
