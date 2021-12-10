@@ -306,7 +306,7 @@ GROUP BY k.nazwa;
 SELECT idWyprawy, SUM(length(dziennik)) AS suma FROM etapy_wyprawy GROUP BY idWyprawy HAVING suma<400 ;
 
 #b)
-SELECT u.id_wyprawy, SUM(e.ilosc*z.waga), COUNT(DISTINCT u.id_uczestnika) FROM uczestnicy u
+SELECT u.id_wyprawy, round(SUM(e.ilosc*z.waga)/COUNT(DISTINCT u.id_uczestnika),2) FROM uczestnicy u
 LEFT JOIN ekwipunek e ON u.id_uczestnika=e.idKreatury
 LEFT JOIN zasob z ON z.idZasobu=e.idZasobu
 GROUP BY u.id_wyprawy;
@@ -318,3 +318,37 @@ INNER JOIN wyprawa w ON u.id_wyprawy=w.id_wyprawy
 INNER JOIN etapy_wyprawy ew ON w.id_wyprawy=ew.idWyprawy
 INNER JOIN sektor s ON ew.sektor=s.id_sektora
 WHERE s.nazwa='Chatka dziadka';
+
+
+#zajecia 10-12-2021
+#Zadanie 1*
+#a) 
+
+
+#b)
+
+
+#c)
+
+
+#Zadanie 2*
+#a) 
+
+#b)
+
+
+#Zadanie 3*
+#a) 
+
+#b)
+
+
+#Zadanie 4*
+#a) 
+
+#b)
+
+
+#Zadanie 5*
+#a) 
+
