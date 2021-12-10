@@ -347,12 +347,21 @@ SELECT*FROM zamowienie ORDER BY data_zamowienia DESC LIMIT 10;
 SELECT*FROM pracownik ORDER BY pensja LIMIT 5;
 
 #9.
+SELECT*FROM towar WHERE nazwa_towaru NOT LIKE '%a%' ORDER BY cena_zakupu LIMIT 10;
 
+#10.
+SELECT t.nazwa_towaru, jem.nazwa FROM towar t 
+LEFT JOIN stan_magazynowy sm ON t.id_towaru=sm.towar
+LEFT JOIN jednostka_miary jem ON sm.jm=jem.id_jednostki
+WHERE jem.nazwa='szt';
 
+#11.
+CREATE TABLE franczakd.towary_powyzej_100 SELECT*FROM towar WHERE cena_zakupu>=100;  
 
+#12.
+CREATE TABLE franczakd.pracownik_50_plus SELECT imie, (YEAR(NOW())-YEAR(data_urodzenia)) AS wiek FROM pracownik HAVING wiek>=50;
 
-
-
+#Zadanie- część 2* LAB 2 zti_bazy
 
 
 
