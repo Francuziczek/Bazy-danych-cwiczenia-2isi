@@ -321,34 +321,41 @@ WHERE s.nazwa='Chatka dziadka';
 
 
 #zajecia 10-12-2021
-#Zadanie 1*
-#a) 
+#Zadanie- część 1* LAB 2 zti_bazy
+#1. 
+SELECT nazwisko FROM pracownik ORDER BY nazwisko;
+
+#2.
+SELECT imie, nazwisko, pensja, data_urodzenia FROM pracownik WHERE YEAR(data_urodzenia)>1979;
+
+#3.
+SELECT*FROM pracownik WHERE pensja BETWEEN 3500 AND 5000;
+
+#4.
+SELECT towar,ilosc FROM stan_magazynowy WHERE ilosc>10;
+
+#5.
+SELECT*FROM towar WHERE nazwa_towaru LIKE 'A%' OR nazwa_towaru LIKE 'B%' OR nazwa_towaru LIKE 'C%';
+
+#6.
+SELECT*FROM klient WHERE czy_firma=0;
+
+#7.
+SELECT*FROM zamowienie ORDER BY data_zamowienia DESC LIMIT 10;
+
+#8.
+SELECT*FROM pracownik ORDER BY pensja LIMIT 5;
+
+#9.
 
 
-#b)
 
 
-#c)
 
 
-#Zadanie 2*
-#a) 
-
-#b)
 
 
-#Zadanie 3*
-#a) 
-
-#b)
 
 
-#Zadanie 4*
-#a) 
 
-#b)
-
-
-#Zadanie 5*
-#a) 
 
