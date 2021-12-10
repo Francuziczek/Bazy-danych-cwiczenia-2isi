@@ -350,10 +350,11 @@ SELECT*FROM pracownik ORDER BY pensja LIMIT 5;
 SELECT*FROM towar WHERE nazwa_towaru NOT LIKE '%a%' ORDER BY cena_zakupu LIMIT 10;
 
 #10.
-SELECT t.nazwa_towaru, jem.nazwa FROM towar t 
+SELECT t.nazwa_towaru, jem.nazwa, t.cena_zakupu FROM towar t 
 LEFT JOIN stan_magazynowy sm ON t.id_towaru=sm.towar
 LEFT JOIN jednostka_miary jem ON sm.jm=jem.id_jednostki
-WHERE jem.nazwa='szt';
+WHERE jem.nazwa='szt'
+ORDER BY t.nazwa_towaru ASC, t.cena_zakupu DESC;
 
 #11.
 CREATE TABLE franczakd.towary_powyzej_100 SELECT*FROM towar WHERE cena_zakupu>=100;  
@@ -361,8 +362,51 @@ CREATE TABLE franczakd.towary_powyzej_100 SELECT*FROM towar WHERE cena_zakupu>=1
 #12.
 CREATE TABLE franczakd.pracownik_50_plus SELECT imie, (YEAR(NOW())-YEAR(data_urodzenia)) AS wiek FROM pracownik HAVING wiek>=50;
 
-#Zadanie- część 2* LAB 2 zti_bazy
 
+#Zadanie- część 2* LAB 2 zti_bazy
+#1. 
+SELECT p.imie, p.nazwisko, d.nazwa FROM pracownik p
+INNER JOIN dzial d ON p.dzial=d.id_dzialu;
+
+#2.
+SELECT t.nazwa_towaru, k.nazwa_kategori, sm.ilosc FROM towar t
+INNER JOIN kategoria k ON t.kategoria=k.id_kategori
+INNER JOIN stan_magazynowy sm ON t.id_towaru=sm.towar
+ORDER BY sm.ilosc DESC;
+
+#3.
+SELECT*FROM zamowienie z
+INNER JOIN status_zamowienia sz ON z.status_zamowienia=sz.id_statusu_zamowienia
+WHERE sz.nazwa_statusu_zamowienia='anulowane';
+
+#4.
+SELECT*FROM klient k
+INNER JOIN adres_klienta ak ON k.id_klienta=ak.klient
+WHERE ak.miejscowosc="Olsztyn";
+
+#5.
+SELECT*FROM stan_magazynowy sm
+INNER JOIN jednostka_miary j_m ON sm.jm=j_m.id_jednostki
+WHERE sm
+
+#6.
+
+
+#7.
+
+
+#8.
+
+
+#9.
+
+
+#10.
+SELECT*FROM adres_klienta 
+WHERE kod NOT LIKE '__-___';
+
+SELECT*FROM akres_klienta 
+WHERE kod NOT REGEXP '[0-9]{2}-[0-9]{3}';
 
 
 
