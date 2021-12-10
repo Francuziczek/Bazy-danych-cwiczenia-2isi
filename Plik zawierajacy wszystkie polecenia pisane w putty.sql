@@ -306,14 +306,10 @@ GROUP BY k.nazwa;
 SELECT idWyprawy, SUM(length(dziennik)) AS suma FROM etapy_wyprawy GROUP BY idWyprawy HAVING suma<400 ;
 
 #b)
-SELECT w.id_wyprawy, SUM(z.waga), COUNT(w.id_wyprawy), SUM(z.waga)/COUNT(k.idKreatury) AS srednia_waga FROM wyprawa w
-LEFT JOIN uczestnicy u ON w.id_wyprawy=u.id_wyprawy
-LEFT JOIN kreatura k ON u.id_uczestnika=k.idKreatury
-LEFT JOIN ekwipunek e ON k.idKreatury=e.idKreatury
-LEFT JOIN zasob z ON e.idZasobu=z.idZasobu
-GROUP BY w.id_wyprawy;
-
-
+SELECT u.id_wyprawy, SUM(e.ilosc*z.waga), COUNT(DISTINCT u.id_uczestnika) FROM uczestnicy u
+LEFT JOIN ekwipunek e ON u.id_uczestnika=e.idKreatury
+LEFT JOIN zasob z ON z.idZasobu=e.idZasobu
+GROUP BY u.id_wyprawy;
 #Zadanie 5*
 #a) 
 SELECT k.nazwa, datediff(w.data_rozpoczecia,k.dataUr) AS 'wiek w dniach' FROM kreatura k
