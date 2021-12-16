@@ -390,16 +390,22 @@ INNER JOIN jednostka_miary j_m ON sm.jm=j_m.id_jednostki
 WHERE sm
 
 #6.
-
+SELECT z.numer_zamowienia, t.nazwa_towaru, pz.ilosc, pz.cena FROM zamowienie z
+INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
+INNER JOIN towar t ON pz.towar=t.id_towaru
+WHERE YEAR(z.data_zamowienia)=2018
+ORDER BY z.numer_zamowienia;
 
 #7.
 
 
 #8.
-
+SELECT*FROM zamowienie ORDER BY data_zamowienia LIMIT 5;
 
 #9.
-
+SELECT*FROM zamowienie z
+INNER JOIN status_zamowienia sz ON z.status_zamowienia=sz.id_statusu_zamowienia  
+WHERE sz.nazwa_statusu_zamowienia != 'zrealizowane';
 
 #10.
 SELECT*FROM adres_klienta 
