@@ -397,7 +397,10 @@ WHERE YEAR(z.data_zamowienia)=2018
 ORDER BY z.numer_zamowienia;
 
 #7.
-
+CREATE TABLE franczakd.towary_full_info SELECT t.nazwa_towaru, t.cena_zakupu, k.nazwa_kategori, sm.ilosc, jm.nazwa FROM towar t
+INNER JOIN kategoria k ON t.kategoria=k.id_kategori
+INNER JOIN stan_magazynowy sm ON t.id_towaru=sm.towar
+INNER JOIN jednostka_miary jm ON sm.jm=jm.id_jednostki;
 
 #8.
 SELECT*FROM zamowienie ORDER BY data_zamowienia LIMIT 5;
