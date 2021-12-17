@@ -418,6 +418,51 @@ SELECT*FROM akres_klienta
 WHERE kod NOT REGEXP '[0-9]{2}-[0-9]{3}';
 
 
+#Zadanie- część 1* LAB 3 zti_bazy
+#1.
+SELECT imie, nazwisko, YEAR(data_urodzenia) FROM pracownik;
 
+#2.
+SELECT imie, nazwisko, YEAR(NOW())-YEAR(data_urodzenia) FROM pracownik;
+
+#3.
+SELECT d.nazwa, COUNT(p.id_pracownika) FROM pracownik p
+INNER JOIN dzial d ON p.dzial=d.id_dzialu
+GROUP BY d.nazwa;
+
+#4.
+SELECT k.nazwa_kategori, COUNT(t.id_towaru) FROM towar t
+INNER JOIN kategoria k ON t.kategoria=k.id_kategori
+GROUP BY k.nazwa_kategori;
+
+#5.
+SELECT k.nazwa_kategori, t.nazwa_towaru  FROM towar t
+INNER JOIN kategoria k ON t.kategoria=k.id_kategori;
+
+#6.
+SELECT ROUND(AVG(pensja),2) AS 'srednia pensja' FROM pracownik;
+
+#7.
+SELECT AVG(pensja), FROM pracownik
+WHERE YEAR(NOW())-YEAR(data_zatrudnienia)>=5;
+
+#8.
+SELECT t.nazwa_towaru, SUM(pz.ilosc) FROM towar t
+INNER JOIN pozycja_zamowienia pz ON pz.towar= t.id_towaru
+GROUP BY t.id_towaru
+ORDER BY SUM(pz.ilosc) DESC LIMIT 10;
+
+#9. do poprawki
+SELECT z.numer_zamowienia, SUM(pz.ilosc*pz.cena) FROM zamowienie z
+INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie 
+WHERE YEAR(z.data_zamowienia)=2017 AND MONTH(z.data_zamowienia) IN (1,2,3)
+GROUP BY z.numer_zamowienia;
+
+#10.
+SELECT p.imie, p.nazwisko, SUM(pz.ilosc*pz.cena) FROM pracownik p
+INNER JOIN zamowienie z ON p.id_pracownika=z.pracownik_id_pracownika
+INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
+GROUP BY z.numer_zamowienia
+ORDER BY SUM(pz.ilosc*pz.cena) DESC;
 
 
