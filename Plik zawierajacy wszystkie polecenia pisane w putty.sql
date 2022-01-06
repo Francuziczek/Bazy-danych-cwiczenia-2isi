@@ -446,23 +446,22 @@ SELECT ROUND(AVG(pensja),2) AS 'srednia pensja' FROM pracownik;
 SELECT AVG(pensja), FROM pracownik
 WHERE YEAR(NOW())-YEAR(data_zatrudnienia)>=5;
 
-#8.
-SELECT t.nazwa_towaru, SUM(pz.ilosc) FROM towar t
-INNER JOIN pozycja_zamowienia pz ON pz.towar= t.id_towaru
-GROUP BY t.id_towaru
-ORDER BY SUM(pz.ilosc) DESC LIMIT 10;
+#8
+SELECT t.nazwa_towaru, COUNT(pz.towar) FROM towar t 
+INNER JOIN pozycja_zamowienia pz ON pz.towar=t.id_towaru 
+GROUP BY t.nazwa_towaru 
+ORDER BY COUNT(pz.towar) DESC LIMIT 10: 
 
-#9. do poprawki
-SELECT z.numer_zamowienia, SUM(pz.ilosc*pz.cena) FROM zamowienie z
-INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie 
-WHERE YEAR(z.data_zamowienia)=2017 AND MONTH(z.data_zamowienia) IN (1,2,3)
-GROUP BY z.numer_zamowienia;
+#9.
+SELECT z.numer_zamowienia, SUM(pz.cena) FROM zamowienie z 
+INNER JOIN pozycja_zamowienia pz ON pz.zamowienie=z.numer_zamowienia 
+WHERE z.data_zamowienia BETWEEN '2017-01-01' AND '2017-03-31' 
+GROUP BY z.numer_zamowienia; 
 
 #10.
-SELECT p.imie, p.nazwisko, SUM(pz.ilosc*pz.cena) FROM pracownik p
-INNER JOIN zamowienie z ON p.id_pracownika=z.pracownik_id_pracownika
-INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
-GROUP BY z.numer_zamowienia
-ORDER BY SUM(pz.ilosc*pz.cena) DESC;
-
+SELECT p.imie, p.nazwisko, SUM(pz.cena) as suma FROM pracownik p 
+INNER JOIN zamowienie z ON z.pracownik_id_pracownika=p.id_pracownika 
+INNER JOIN pozycja_zamowienia pz ON pz.zamowienie=z.numer_zamowienia 
+GROUP BY p.id_pracownika 
+ORDER BY suma DESC; 
 
