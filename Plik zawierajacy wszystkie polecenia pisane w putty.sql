@@ -446,7 +446,7 @@ SELECT ROUND(AVG(pensja),2) AS 'srednia pensja' FROM pracownik;
 SELECT AVG(pensja), FROM pracownik
 WHERE YEAR(NOW())-YEAR(data_zatrudnienia)>=5;
 
-#8
+#8.
 SELECT t.nazwa_towaru, COUNT(pz.towar) FROM towar t 
 INNER JOIN pozycja_zamowienia pz ON pz.towar=t.id_towaru 
 GROUP BY t.nazwa_towaru 
@@ -466,4 +466,55 @@ GROUP BY p.id_pracownika
 ORDER BY suma DESC; 
 
 
-#Zadanie część 1  LAB 3 zti_bazy
+#Zadanie część 2  LAB 3 zti_bazy
+
+#1.
+SELECT d.nazwa, AVG(p.pensja), MAX(p.pensja), MIN(p.pensja) FROM pracownik p
+INNER JOIN dzial d ON p.dzial=d.id_dzialu
+GROUP BY d.nazwa;
+
+#2.
+SELECT k.pelna_nazwa, pz.ilosc*pz.cena AS wartosc_zamowienia FROM zamowienie z
+INNER JOIN klient k ON  z.klient=k.id_klienta
+INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
+ORDER BY wartosc_zamowienia DESC LIMIT 10;
+
+#3.
+SELECT YEAR(z.data_zamowienia) AS rok_zamowienia, SUM(pz.ilosc*pz.cena) AS wartosc_przychodu FROM zamowienie z
+INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
+WHERE z.status_zamowienia!="6"
+GROUP BY rok_zamowienia;
+
+#4.
+SELECT z.numer_zamowienia, pz.ilosc*pz.cena, z.status_zamowienia AS wartosc_zamowienia FROM zamowienie z
+INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
+WHERE z.status_zamowienia=6;
+
+SELECT  SUM(pz.ilosc*pz.cena) FROM zamowienie z
+INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
+WHERE z.status_zamowienia=6;
+
+#5.
+SELECT ak.miejscowosc, COUNT(z.id_zamowienia) AS liczba_zamowien, SUM(pz.ilosc*pz.cena)AS suma_zamowien FROM pozycja_zamowienia pz 
+INNER JOIN zamowienie z ON pz.zamowienie=z.id_zamowienia 
+INNER JOIN klient k ON z.klient=k.id_klienta
+INNER JOIN adres_klienta ak ON k.id_klienta=ak.klient 
+WHERE ak.typ_adresu=1
+GROUP BY ak.miejscowosc;
+
+#6.
+SELECT SUM(pz.ilosc*pzcena) FROM pozycja zamowienia pz
+INNER JOIN zamowienie z ON pz.zamowienie=z.id_zamowienia
+INNER JOIN status_zamowienia pz ON z.status_zamowienia=sz.id_satusu_zamowienia
+WHERE sz.nazwa_statusu_zamowienia
+
+#7.
+
+
+#8.
+
+
+#9.
+
+
+#10.
