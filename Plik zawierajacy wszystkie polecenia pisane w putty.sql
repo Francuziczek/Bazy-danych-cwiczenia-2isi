@@ -465,3 +465,5 @@ INNER JOIN pozycja_zamowienia pz ON pz.zamowienie=z.numer_zamowienia
 GROUP BY p.id_pracownika 
 ORDER BY suma DESC; 
 
+
+#Zadanie część 1  LAB 3 zti_bazy
