@@ -467,57 +467,46 @@ ORDER BY suma DESC;
 
 
 #Zadanie część 2  LAB 3 zti_bazy
+#1
+SELECT d.nazwa, MIN(p.pensja), MAX(p.pensja) FROM dzial d
+INNER JOIN pracownik p ON p.dzial=d.id_dzialu
+GROUP BY d.id_dzialu;
 
-#1.
-SELECT d.nazwa, AVG(p.pensja), MAX(p.pensja), MIN(p.pensja) FROM pracownik p
-INNER JOIN dzial d ON p.dzial=d.id_dzialu
-GROUP BY d.nazwa;
+#2
+SELECT k.pelna_nazwa, SUM(pz.cena) as cena FROM klient k
+INNER JOIN zamowienie z ON z.klient=k.id_klienta
+INNER JOIN pozycja_zamowienia pz ON pz.zamowienie=z.numer_zamowienia
+GROUP BY k.id_klienta ORDER BY cena DESC LIMIT 10;
 
-#2.
-SELECT k.pelna_nazwa, pz.ilosc*pz.cena AS wartosc_zamowienia FROM zamowienie z
-INNER JOIN klient k ON  z.klient=k.id_klienta
-INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
-ORDER BY wartosc_zamowienia DESC LIMIT 10;
+#3
+SELECT YEAR(z.data_zamowienia), SUM(pz.cena) as przychod FROM zamowienie z
+INNER JOIN pozycja_zamowienia pz ON pz.zamowienie = z.numer_zamowienia
+GROUP BY YEAR(z.data_zamowienia) ORDER BY przychod DESC;
 
-#3.
-SELECT YEAR(z.data_zamowienia) AS rok_zamowienia, SUM(pz.ilosc*pz.cena) AS wartosc_przychodu FROM zamowienie z
-INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
-WHERE z.status_zamowienia!="6"
-GROUP BY rok_zamowienia;
+#4
+SELECT SUM(pz.cena) FROM pozycja_zamowienia pz
+INNER JOIN zamowienie z ON z.numer_zamowienia=pz.zamowienie
+INNER JOIN status_zamowienia sz ON sz.id_statusu_zamowienia=z.status_zamowienia
+WHERE sz.nazwa_statusu_zamowienia = 'anulowane';
 
-#4.
-SELECT z.numer_zamowienia, pz.ilosc*pz.cena, z.status_zamowienia AS wartosc_zamowienia FROM zamowienie z
-INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
-WHERE z.status_zamowienia=6;
-
-SELECT  SUM(pz.ilosc*pz.cena) FROM zamowienie z
-INNER JOIN pozycja_zamowienia pz ON z.id_zamowienia=pz.zamowienie
-WHERE z.status_zamowienia=6;
-
-#5.
-SELECT ak.miejscowosc, COUNT(z.id_zamowienia) AS liczba_zamowien, SUM(pz.ilosc*pz.cena)AS suma_zamowien FROM pozycja_zamowienia pz 
-INNER JOIN zamowienie z ON pz.zamowienie=z.id_zamowienia 
-INNER JOIN klient k ON z.klient=k.id_klienta
-INNER JOIN adres_klienta ak ON k.id_klienta=ak.klient 
-WHERE ak.typ_adresu=1
+#5
+SELECT ak.miejscowosc, COUNT(DISTINCT z.id_zamowienia), SUM(DISTINCT z.id_zamowienia) FROM zamowienie z
+INNER JOIN klient k ON z.klient = k.id_klienta
+INNER JOIN adres_klienta ak ON ak.klient=k.id_klienta
 GROUP BY ak.miejscowosc;
 
-#6.
-SELECT SUM(pz.ilosc*pzcena) FROM pozycja zamowienia pz
-INNER JOIN zamowienie z ON pz.zamowienie=z.id_zamowienia
-INNER JOIN status_zamowienia pz ON z.status_zamowienia=sz.id_satusu_zamowienia
-WHERE sz.nazwa_statusu_zamowienia
+#6
+SELECT SUM(pz.cena) FROM zamowienie z
+INNER JOIN pozycja_zamowienia pz ON z.numer_zamowienia = pz.zamowienie
+INNER JOIN status_zamowienia sz ON sz.id_statusu_zamowienia=z.status_zamowienia
+WHERE sz.nazwa_statusu_zamowienia = "zrealizowane"
+GROUP BY sz.id_statusu_zamowienia;
 
-#7.
+#7
+SELECT sum(pz.cena) as dochod from zamowienie z
+INNER JOIN pozycja_zamowienia pz ON z.numer_zamowienia = pz.zamowienie
+GROUP BY YEAR(z.data_zamowienia) ORDER BY dochod DESC;
 
-
-#8.
-
-
-#9.
-
-
-#10.
 
 
 
